@@ -1,0 +1,67 @@
+---
+import type {Props} from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/TwoColumnContent.astro';
+
+const isHomepage = Astro.props.id === '';
+---
+
+{
+    isHomepage ? (
+    <Default {...Astro.props}>
+        <slot/>
+    </Default>
+        ) : (
+    <Default {...Astro.props}>
+        <slot/>
+        <slot name="right-sidebar" slot="right-sidebar"/>
+        <footer>
+            <div class="containerBlock">
+                <p>
+                    © 2024 The site is the property of UAProject. All rights reserved.
+                </p>
+                <p>
+                    We are in no way affiliated with or endorsed by Mojang, AB.
+                </p>
+            </div>
+            <div class="footerNavbar">
+                <div><a href="https://uaproject.xyz">Головна</a></div>
+                <div><a href="https://wiki.uaproject.xyz" class="activeLink">Вікіпедія</a></div>
+                <div><a href="https://uaproject.xyz/shop">Крамниця</a></div>
+                <div><a href="https://uaproject.xyz/start">Початок гри</a></div>
+                <div><a href="https://uaproject.xyz/form">Анкета</a></div>
+            </div>
+        </footer>
+    </Default>
+        )
+    }
+
+
+<style>
+    footer {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        padding: 1rem 0;
+        text-align: center;
+    }
+
+    .footerNavbar {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .footerNavbar a {
+        padding: 10px 6px;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+    .footerNavbar a:hover {
+        color: #ee7828;
+    }
+
+    .activeLink {
+        border-bottom: 2px solid #ee7828;
+    }
+</style>

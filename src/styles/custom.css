@@ -1,0 +1,18 @@
+:root {
+    --sl-font: 'Regular Font', sans-serif;
+    --sl-font-bold: 'Headlines Font', sans-serif;
+    --sl-content-width: 60rem;
+    --sl-text-5xl: 2.5rem;
+    --sl-color-bg-sidebar: #171A21;
+    --sl-color-bg: #23262C;
+    /*--sl-color-hairline: #2D3037;*/
+    --sl-sidebar-pad-x: 0.5rem;
+    --sl-sidebar-width: 17rem;
+    --sl-sidebar-width-closed: 4rem;
+    --sl-sidebar-width-open: 17rem;
+    --sl-sidebar-transition: width 0.2s ease-in-out;
+    --sl-text-h1: 48px;
+    --sl-text-h2: 24px;
+    --sl-text-h3: 20px;
+}
+

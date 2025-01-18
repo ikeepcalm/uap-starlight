@@ -1,5 +1,5 @@
 ---
-title: SkinsRestorer
+title: Скіни
 description: Детальна інформація про плагін SkinsRestorer
 ---
 

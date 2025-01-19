@@ -14,7 +14,7 @@ const isHomepage = Astro.props.id === '';
     <Default {...Astro.props}>
         <slot/>
         <slot name="right-sidebar" slot="right-sidebar"/>
-        <footer>
+        <footer class=".footer">
             <div class="containerBlock">
                 <p>
                     © 2024 The site is the property of UAProject. All rights reserved.
@@ -49,6 +49,7 @@ const isHomepage = Astro.props.id === '';
         justify-content: center;
         gap: 0.5rem;
         margin-top: 1rem;
+        flex-wrap: wrap;
     }
 
     .footerNavbar a {
@@ -63,5 +64,16 @@ const isHomepage = Astro.props.id === '';
 
     .activeLink {
         border-bottom: 2px solid #ee7828;
+    }
+
+    @media (max-width: 600px) {
+        .footerNavbar {
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        footer{
+            padding: 0rem 3rem;
+        }
     }
 </style>

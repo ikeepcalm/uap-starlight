@@ -10,7 +10,7 @@
     --sl-sidebar-width-closed: 4rem;
     --sl-sidebar-width-open: 17rem;
     --sl-sidebar-transition: width 0.2s ease-in-out;
-    --sl-text-h1: 48px;
+    --sl-text-h1: 36px;
     --sl-text-h2: 24px;
     --sl-text-h3: 20px;
 }
@@ -19,8 +19,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .full-width {

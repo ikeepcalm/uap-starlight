@@ -1,6 +1,9 @@
 ---
-title: Скіни
+title: Скіни 
 description: Детальна інформація про плагін SkinsRestorer
+sidebar:
+    label: Скіни
+    order: 1
 ---
 
 # Як встановити скіни на сервері?

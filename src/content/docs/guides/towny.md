@@ -2,7 +2,7 @@
 title: Міста
 description: Детальна інформація про міста на сервері
 sidebar:
-  label: Міста
+  label: Ігрові міста
   order: 2
 ---
 

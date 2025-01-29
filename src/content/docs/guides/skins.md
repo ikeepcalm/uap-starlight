@@ -2,7 +2,7 @@
 title: Скіни 
 description: Детальна інформація про плагін SkinsRestorer
 sidebar:
-    label: Скіни
+    label: Власні скіни
     order: 1
 ---
 

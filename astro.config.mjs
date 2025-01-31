@@ -40,6 +40,10 @@ export default defineConfig({
                     label: '☔ Магія?',
                     autogenerate: {directory: 'magic'},
                 },
+                {
+                    label: '✨ Підтримка ',
+                    autogenerate: {directory: 'support'},
+                }
             ],
         }),
     ],

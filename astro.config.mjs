@@ -18,7 +18,7 @@ export default defineConfig({
                 },
             },
             logo: {
-                src: './src/assets/logo.svg'
+                src: './src/assets/favicon.svg'
             },
             social: {
                 discord: 'https://discord.gg/uaproject',

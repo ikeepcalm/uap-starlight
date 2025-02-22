@@ -48,7 +48,7 @@ sidebar:
 - **`/td "<посилання>" <назва-файлу> <назва-платівки>`**
 
 🔹 **Приклад:**  
-- `/td /td "https://dropbox.com/s/1234567890/MySong.mp3&dl=1" song.mp3 Caramelldansen`
+- `/td https://dropbox.com/s/1234567890/MySong.mp3&dl=1 song.mp3 Caramelldansen`
 
 ---
 

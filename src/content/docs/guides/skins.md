@@ -3,7 +3,7 @@ title: 🎭 Власні скіни
 description: Детальна інформація про плагін SkinsRestorer  
 sidebar:  
     label: 📸 Власні скіни  
-    order: 1
+    order: 2
 ---
 
 ## Про SkinsRestorer

@@ -49,6 +49,10 @@ export default defineConfig({
                     autogenerate: {directory: 'magic'},
                 },
                 {
+                    label: '🪄 Магічні шляхи',
+                    autogenerate: {directory: 'pathways'},
+                },
+                {
                     label: '✨ Підтримка ',
                     autogenerate: {directory: 'support'},
                 }

@@ -6,6 +6,7 @@ sidebar:
     order: 6
 ---
 
+import {Image} from "astro:assets";
 import stealth from '../../../assets/pathways/demoness/stealth.gif';
 import feather from '../../../assets/pathways/demoness/feather-falling.gif';
 
@@ -52,7 +53,7 @@ import feather from '../../../assets/pathways/demoness/feather-falling.gif';
 Завдайте смертельного удару з тіні. Якщо ворог не підозрює, шкода підвищується.
 
 <p align={"center"}>
-    <img src={stealth.src} width={"80%"} alt="Прихований удар"/>
+    <Image src={stealth} alt="Прихований удар"/>
 </p>
 
 
@@ -60,7 +61,7 @@ import feather from '../../../assets/pathways/demoness/feather-falling.gif';
 Приземляйтеся з великої висоти м'яко.
 
 <p align={"center"}>
-    <img src={feather.src} width={"80%"} alt="Плавне падіння"/>
+    <Image src={feather} alt="Плавне падіння"/>
 </p>
 
 {/* [GIF демонстрація] */}

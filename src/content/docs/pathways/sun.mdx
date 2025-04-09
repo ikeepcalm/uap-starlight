@@ -6,8 +6,12 @@ sidebar:
     order: 1
 ---
 
+import {Image} from "astro:assets";
 import bard_song from '../../../assets/pathways/sun/bard-song.gif';
 import holy_light from '../../../assets/pathways/sun/holy-light.gif';
+import better_holy_light from '../../../assets/pathways/sun/better-holy-light.gif';
+import holy_oath from '../../../assets/pathways/sun/holy-oath.gif';
+import holy_cleave from '../../../assets/pathways/sun/holy-cleave.gif';
 
 :::caution[⚠️ Дисклеймер]
 > 🎭 За те, що дарує доля, завжди доводиться платити, чи не так?
@@ -52,7 +56,7 @@ import holy_light from '../../../assets/pathways/sun/holy-light.gif';
 Зачаровує істот поруч, надаючи собі та союзникам посилення.
 
 <p align={"center"}>
-    <img src={bard_song.src} width={"80%"} alt="Пісня Барда"/>
+    <Image src={bard_song} alt="Пісня Барда"/>
 </p>
 
 ---
@@ -65,7 +69,7 @@ import holy_light from '../../../assets/pathways/sun/holy-light.gif';
 Скористайтеся силою світла та вогню, щоб вигнати темряву.
 
 <p align={"center"}>
-    <img src={holy_light.src} width={"80%"} alt="Світло і Вогонь"/>
+    <Image src={holy_light} alt="Світло і Вогонь"/>
 </p>
 
 #### 🛡️ Імунітет до Жаху
@@ -82,17 +86,23 @@ import holy_light from '../../../assets/pathways/sun/holy-light.gif';
 #### ⚔️ Розруб Очищення
 Удар, що з кожним розмахом виганяє скверну. Важко влучити, висока шкода!
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={holy_cleave} alt="Розруб Очищення"/>
+</p>
 
 #### 📜 Клятва Святості
 Присягніть непохитною присягою й отримуйте бафи, поки діє присяга.
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={holy_oath}  alt="Свята Клятва"/>
+</p>
 
 #### ✨ Святе Світло
 Випромінює священну енергію для очищення і зцілення (у випадку з мобами - навпаки)
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={better_holy_light} alt="Святе Світло"/>
+</p>
 
 ---
 

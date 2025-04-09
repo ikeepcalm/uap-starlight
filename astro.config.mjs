@@ -1,11 +1,19 @@
 // @ts-check
 import {defineConfig} from 'astro/config';
 import starlight from '@astrojs/starlight';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
     output: 'static',
+    image: {
+        service: {
+            entrypoint: 'astro/assets/services/sharp',
+            config: {
+                limitInputPixels: false,
+            },
+        },
+    },
     adapter: vercel({
         webAnalytics: {
             enabled: true,

@@ -6,7 +6,14 @@ sidebar:
     order: 2
 ---
 
-{/* import door_opening from '../../../assets/pathways/door/door-opening.gif'; */}
+import {Image} from "astro:assets";
+import door_opening from '../../../assets/pathways/door/door-opening.webp';
+import divination from '../../../assets/pathways/door/divination.webp';
+import divination2 from '../../../assets/pathways/door/divination-2.webp';
+import divination3 from '../../../assets/pathways/door/divination-3.webp';
+import freezing from '../../../assets/pathways/door/freezing.webp';
+import wind from '../../../assets/pathways/door/light-wind.webp';
+import tricks from '../../../assets/pathways/door/tricks.webp';
 
 :::caution[⚠️ Дисклеймер]
 > 🎭 За те, що дарує доля, завжди доводиться платити, чи не так?
@@ -50,14 +57,18 @@ sidebar:
 #### 🚪 Відчинення Дверей
 Проходьте крізь тверді поверхні, наче крізь ілюзорні двері зі світла.
 
-{/*
 <p align={"center"}>
-    <img src={door_opening.src} width={"80%"} alt="Відчинення Дверей"/>
+    <Image src={door_opening} alt="Відчинення Дверей"/>
 </p>
-*/}
+
 
 #### 🎭 Підступні Чари
 Використовуйте прості чари, щоб збити ворогів з пантелику.
+
+<p align={"center"}>
+    <Image src={tricks} alt="Підступні Чари"/>
+</p>
+
 
 {/* [GIF демонстрація] */}
 
@@ -68,12 +79,16 @@ sidebar:
 #### 💨 Легкий Вітер
 Закликаєте легкий вітер, що відштовхує ворогів.
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={wind} alt="Легкий Вітер"/>
+</p>
 
 #### ❄️ Заморожування
 Надає змогу заморожувати ворогів дотиком.
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={freezing} alt="Заморожування"/>
+</p>
 
 ---
 
@@ -84,7 +99,17 @@ sidebar:
 #### 🔮 Пророцтво
 Дозволяє передбачати ймовірні результати та події.
 
-{/* [GIF демонстрація] */}
+<p align={"center"}>
+    <Image src={divination} alt="Пророцтво"/>
+</p>
+
+<p align={"center"}>
+    <Image src={divination2} alt="Пророцтво"/>
+</p>
+
+<p align={"center"}>
+    <Image src={divination3} alt="Пророцтво"/>
+</p>
 
 ---
 

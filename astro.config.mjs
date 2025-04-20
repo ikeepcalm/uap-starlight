@@ -36,9 +36,9 @@ export default defineConfig({
             logo: {
                 src: './src/assets/favicon.svg'
             },
-            social: {
-                discord: 'https://discord.gg/uaproject',
-            },
+            social: [
+                {icon: 'discord', label: 'Discord', href: 'https://discord.gg/uaproject'}
+            ],
             customCss: [
                 './src/fonts/font-face.css',
                 './src/styles/custom.css',

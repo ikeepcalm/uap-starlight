@@ -2,6 +2,7 @@
 import {defineConfig} from 'astro/config';
 import starlight from '@astrojs/starlight';
 import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,9 +22,33 @@ export default defineConfig({
         maxDuration: 8,
     }),
     integrations: [
+        sitemap(),
         starlight({
             title: 'UAProject',
             defaultLocale: 'root',
+            head: [
+                {
+                    tag: 'meta',
+                    attrs: {
+                        property: 'og:image',
+                        content: 'https://docs.uaproject.xyz/favicon.svg',
+                    },
+                },
+                {
+                    tag: 'meta',
+                    attrs: {
+                        property: 'og:type',
+                        content: 'website',
+                    },
+                },
+                {
+                    tag: 'meta',
+                    attrs: {
+                        name: 'twitter:card',
+                        content: 'summary_large_image',
+                    },
+                },
+            ],
             components: {
                 TwoColumnContent: './src/components/Footer.astro',
             },

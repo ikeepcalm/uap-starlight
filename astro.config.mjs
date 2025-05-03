@@ -21,6 +21,7 @@ export default defineConfig({
         },
         maxDuration: 8,
     }),
+    site: 'https://docs.uaproject.xyz',
     integrations: [
         sitemap(),
         starlight({

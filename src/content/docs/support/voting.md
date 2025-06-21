@@ -23,6 +23,8 @@ sidebar:
 
 🔗 **AllMC**: [allmc.uaproject.xyz](https://allmc.uaproject.xyz)
 
+🔗 **MCSMonitoring**: [MCSMonitoring.uaproject.xyz](https://mcsmonitoring.com.ua/server/43?ref=43)
+
 ---
 
 ## 🎁 Як отримати нагороду за голосування?

@@ -1,29 +1,656 @@
 :root {
-    --sl-font: 'Regular Font', sans-serif;
-    --sl-font-bold: 'Headlines Font', sans-serif;
-    --sl-content-width: 60rem;
-    --sl-text-5xl: 2.5rem;
-   /* --sl-color-gray-6: #171A21;
-    --sl-color-black: #23262C;
-    */
-    --sl-sidebar-pad-x: 0.5rem;
-    --sl-sidebar-width: 17rem;
-    --sl-sidebar-width-closed: 4rem;
-    --sl-sidebar-width-open: 17rem;
-    --sl-sidebar-transition: width 0.2s ease-in-out;
-    --sl-text-h1: 36px;
-    --sl-text-h2: 24px;
-    --sl-text-h3: 20px;
+    --sl-font: 'Regular Font', 'Inter', system-ui, sans-serif;
+    --sl-font-bold: 'Headlines Font', 'Inter', system-ui, sans-serif;
+    --sl-content-width: 65rem;
+    --sl-text-5xl: 2.75rem;
+    
+    /* Enhanced color palette - only override accent colors */
+    --sl-color-accent-low: #dbeafe;
+    --sl-color-accent: #3b82f6;
+    --sl-color-accent-high: #1d4ed8;
+    
+    /* Enhanced spacing and dimensions */
+    --sl-sidebar-pad-x: 1rem;
+    --sl-sidebar-width: 18rem;
+    --sl-sidebar-width-closed: 4.5rem;
+    --sl-sidebar-width-open: 18rem;
+    --sl-sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Enhanced typography */
+    --sl-text-h1: 2.5rem;
+    --sl-text-h2: 1.75rem;
+    --sl-text-h3: 1.375rem;
+    --sl-text-h4: 1.125rem;
+    --sl-line-height: 1.7;
+    --sl-text-body: 1rem;
+    
+    /* Custom shadows and effects */
+    --uap-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --uap-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --uap-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --uap-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --uap-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Custom border radius */
+    --uap-border-radius: 0.75rem;
+    --uap-border-radius-sm: 0.5rem;
+    --uap-border-radius-lg: 1rem;
 }
 
+/* Enhanced content layouts */
 .text-center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
+    gap: 1rem;
 }
 
 .full-width {
     width: 100%;
+}
+
+/* UAP Hero Section */
+.uap-hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-accent) 10%, var(--sl-color-bg) 90%) 0%, var(--sl-color-bg) 100%);
+    border-radius: var(--uap-border-radius-lg);
+    margin-bottom: 3rem;
+    box-shadow: var(--uap-shadow-md);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 15%, transparent);
+}
+
+.uap-hero-content h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--sl-color-accent) 0%, var(--sl-color-accent-high) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.uap-hero-content p {
+    margin: 0;
+    font-size: 1.125rem;
+    opacity: 0.8;
+}
+
+/* UAP Cards Grid */
+.uap-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 0;
+    align-items: start;
+    padding: 0;
+}
+
+/* Ensure all cards have consistent top alignment */
+.uap-cards-grid > .uap-card {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Specifically target the first card to ensure it's not affected by any other CSS */
+.uap-cards-grid > .uap-card:first-child {
+    margin-top: 0 !important;
+    align-self: start !important;
+}
+
+/* Override any markdown first-child rules that might affect our cards grid */
+[data-page-type="home"] .sl-markdown-content > div:first-child {
+    margin-top: 0 !important;
+}
+
+/* Ensure the cards grid itself doesn't have any unwanted spacing */
+.sl-markdown-content .uap-cards-grid {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.uap-card {
+    background: var(--sl-color-bg);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 15%, transparent);
+    border-radius: var(--uap-border-radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--uap-shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 220px;
+    align-self: stretch;
+}
+
+.uap-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--uap-shadow-lg);
+    border-color: var(--sl-color-accent);
+}
+
+.uap-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uap-card h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--sl-color-text);
+    min-height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uap-card p {
+    margin: 0 0 1.25rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    flex-grow: 1;
+}
+
+.uap-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--sl-color-accent);
+    color: white !important;
+    text-decoration: none;
+    border-radius: var(--uap-border-radius);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.uap-card-link:hover {
+    background: var(--sl-color-accent-high);
+    transform: translateY(-1px);
+    box-shadow: var(--uap-shadow-sm);
+}
+
+.uap-card-highlight {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--sl-color-accent) 8%, var(--sl-color-bg) 92%) 0%, var(--sl-color-bg) 100%);
+    border-color: var(--sl-color-accent);
+    grid-column: 1 / -1;
+}
+
+.uap-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.uap-search-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--sl-color-accent) !important;
+    text-decoration: none;
+    border: 2px solid var(--sl-color-accent);
+    border-radius: var(--uap-border-radius);
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.uap-search-btn:hover {
+    background: var(--sl-color-accent);
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: var(--uap-shadow-sm);
+}
+
+.uap-search-btn-secondary {
+    background: var(--sl-color-accent);
+    color: white !important;
+}
+
+.uap-search-btn-secondary:hover {
+    background: var(--sl-color-accent-high);
+    color: white !important;
+}
+
+/* Hide content panel and right sidebar on homepage - multiple approaches */
+
+/* Method 1: Target by page type and class */
+[data-page-type="home"] .content-panel {
+    display: none !important;
+}
+
+[data-page-type="home"] .right-sidebar {
+    display: none !important;
+}
+
+/* Hide the flex container that creates space - multiple approaches */
+[data-page-type="home"] .sl-flex,
+[data-page-type="home"] [class*="sl-flex"],
+[data-page-type="home"] [class*="astro-3yyafb3n"],
+[data-page-type="home"] .astro-3yyafb3n {
+    display: none !important;
+}
+
+/* Target any empty flex containers on homepage */
+[data-page-type="home"] div[class*="sl-flex"]:empty {
+    display: none !important;
+}
+
+/* Hide any spacer elements */
+[data-page-type="home"] .sl-container > div:not(.sl-markdown-content):not(.uap-hero):not(.uap-cards-grid) {
+    display: none !important;
+}
+
+/* Nuclear approach - hide any unwanted elements creating space */
+[data-page-type="home"] main > div:not(.sl-markdown-content) {
+    display: none !important;
+}
+
+[data-page-type="home"] main .sl-markdown-content ~ div {
+    display: none !important;
+}
+
+/* Ensure homepage content has no extra margins/padding */
+[data-page-type="home"] .sl-markdown-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-page-type="home"] .sl-markdown-content > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Ensure cards grid has no bottom margin */
+.uap-cards-grid {
+    margin-bottom: 0 !important;
+}
+
+/* Remove any gap between content and footer */
+.uap-homepage .uap-footer {
+    margin-top: 0 !important;
+}
+
+/* Method 2: Target elements that contain only table of contents */
+[data-page-type="home"] aside:has([title="На цій сторінці"]) {
+    display: none !important;
+}
+
+/* Method 3: Hide any aside with table of contents on homepage */
+[data-page-type="home"] aside[aria-labelledby]:not([aria-label]) {
+    display: none !important;
+}
+
+/* Method 4: Target by Astro-generated classes (may change) */
+[data-page-type="home"] [class*="astro-"][class*="content-panel"] {
+    display: none !important;
+}
+
+[data-page-type="home"] [class*="astro-"][class*="right-sidebar"] {
+    display: none !important;
+}
+
+/* Method 5: Hide based on content structure */
+[data-page-type="home"] .main-frame > div:first-child:not(.sl-markdown-content) {
+    display: none !important;
+}
+
+/* Method 6: Universal approach for any page with our hero */
+.uap-hero:first-child ~ * .content-panel,
+.uap-hero:first-child ~ * .right-sidebar {
+    display: none !important;
+}
+
+/* Ensure our content is always visible */
+[data-page-type="home"] .sl-markdown-content {
+    display: block !important;
+}
+
+/* Enhanced typography */
+.sl-markdown-content h1 {
+    background: linear-gradient(135deg, var(--sl-color-accent) 0%, var(--sl-color-accent-high) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.sl-markdown-content h2 {
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--sl-color-accent);
+}
+
+.sl-markdown-content h3 {
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.sl-markdown-content p {
+    line-height: var(--sl-line-height);
+    margin-bottom: 0.75rem;
+}
+
+/* Enhanced sidebar styling */
+.sidebar-pane {
+    backdrop-filter: blur(10px);
+    box-shadow: var(--uap-shadow-md);
+}
+
+.sidebar-content ul {
+    padding: 0.5rem;
+}
+
+.sidebar-content li {
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-content a {
+    border-radius: var(--uap-border-radius-sm);
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    font-weight: 500;
+}
+
+.sidebar-content a:hover {
+    background: var(--sl-color-accent);
+    color: white;
+    transform: translateX(4px);
+    box-shadow: var(--uap-shadow-sm);
+}
+
+.sidebar-content a[aria-current="page"] {
+    background: linear-gradient(135deg, var(--sl-color-accent) 0%, var(--sl-color-accent-high) 100%);
+    color: white;
+    box-shadow: var(--uap-shadow-md);
+    border-color: var(--sl-color-accent);
+}
+
+/* Enhanced navigation header */
+.header {
+    backdrop-filter: blur(20px);
+    box-shadow: var(--uap-shadow-sm);
+}
+
+/* Card-like content sections */
+.sl-markdown-content img {
+    border-radius: var(--uap-border-radius);
+    box-shadow: var(--uap-shadow-lg);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sl-markdown-content img:hover {
+    transform: scale(1.02);
+    box-shadow: var(--uap-shadow-xl);
+}
+
+/* Enhanced code blocks */
+.sl-markdown-content pre {
+    border-radius: var(--uap-border-radius);
+    box-shadow: var(--uap-shadow-md);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.sl-markdown-content code:not(pre code) {
+    color: var(--sl-color-accent-high);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+/* Enhanced tables */
+.sl-markdown-content table {
+    border-radius: var(--uap-border-radius);
+    overflow: hidden;
+    box-shadow: var(--uap-shadow-md);
+    margin: 1.5rem 0;
+}
+
+.sl-markdown-content th {
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.sl-markdown-content td {
+    padding: 0.75rem 1rem;
+}
+
+.sl-markdown-content tr:hover {
+    background: var(--sl-color-gray-6);
+    background: color-mix(in srgb, var(--sl-color-accent) 10%, transparent);
+}
+
+/* Enhanced blockquotes and callouts */
+.sl-markdown-content blockquote {
+    border-left: 4px solid var(--sl-color-accent);
+    padding: 1.5rem;
+    border-radius: 0 var(--uap-border-radius) var(--uap-border-radius) 0;
+    box-shadow: var(--uap-shadow-sm);
+    margin: 1.5rem 0;
+}
+
+/* Enhanced buttons and links */
+.sl-markdown-content a:not(.header a) {
+    color: var(--sl-color-accent);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.sl-markdown-content a:not(.header a):hover {
+    color: var(--sl-color-accent-high);
+    border-bottom-color: var(--sl-color-accent);
+}
+
+/* Enhanced list styling */
+.sl-markdown-content ul, .sl-markdown-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.sl-markdown-content li {
+    margin-bottom: 0.5rem;
+    line-height: var(--sl-line-height);
+}
+
+.sl-markdown-content li::marker {
+    color: var(--sl-color-accent);
+}
+
+/* Enhanced scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: color-mix(in srgb, var(--sl-color-bg) 80%, var(--sl-color-gray-3) 20%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sl-color-accent);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sl-color-accent-high);
+}
+
+/* Dark mode enhancements */
+:root[data-theme="dark"] {
+    --sl-color-accent-low: #1e3a8a;
+    --sl-color-accent: #60a5fa;
+    --sl-color-accent-high: #93c5fd;
+}
+
+/* Animation enhancements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sl-markdown-content {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Enhanced focus states for accessibility */
+.sidebar-content a:focus,
+.sl-markdown-content a:focus {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+    border-radius: var(--uap-border-radius-sm);
+}
+
+/* Enhanced search styling */
+.search-dialog {
+    border-radius: var(--uap-border-radius-lg) !important;
+    box-shadow: var(--uap-shadow-xl) !important;
+    border: 1px solid var(--sl-color-gray-3) !important;
+}
+
+/* Loading states */
+.sl-markdown-content img:not([src]) {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--sl-color-bg) 80%, var(--sl-color-accent) 10%) 25%, color-mix(in srgb, var(--sl-color-bg) 60%, var(--sl-color-accent) 20%) 50%, color-mix(in srgb, var(--sl-color-bg) 80%, var(--sl-color-accent) 10%) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+.sl-markdown-content img[src] {
+    animation: none;
+    background: none;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Enhanced print styles */
+@media print {
+    .sidebar-pane,
+    .header {
+        display: none !important;
+    }
+    
+    .sl-markdown-content {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    .sl-markdown-content img {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    [data-page-type="home"] .content-panel {
+        padding: 1.5rem;
+        margin: 1rem;
+        border-radius: var(--uap-border-radius);
+    }
+    
+    .sl-markdown-content h1 {
+        font-size: 2rem;
+    }
+    
+    .sl-markdown-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .sidebar-content a {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+    
+    .sl-markdown-content {
+        padding: 1rem;
+    }
+    
+    /* UAP Mobile Styles */
+    .uap-hero {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .uap-hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .uap-hero-content p {
+        font-size: 1rem;
+    }
+    
+    .uap-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .uap-card {
+        padding: 1.25rem;
+    }
+    
+    .uap-card-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .uap-card-highlight {
+        grid-column: 1;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+    :root {
+        --sl-color-accent: #0066cc;
+        --sl-color-accent-high: #004499;
+        --sl-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .sl-markdown-content a {
+        text-decoration: underline;
+    }
 }

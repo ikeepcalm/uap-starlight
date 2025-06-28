@@ -27,6 +27,8 @@ export default defineConfig({
         starlight({
             title: 'UAProject',
             defaultLocale: 'root',
+            description: 'Повна документація українського Minecraft сервера UAProject',
+            favicon: './src/assets/favicon.svg',
             head: [
                 {
                     tag: 'meta',

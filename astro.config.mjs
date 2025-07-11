@@ -25,10 +25,10 @@ export default defineConfig({
     integrations: [
         sitemap(),
         starlight({
-            title: 'UAProject',
+            title: 'UAProject - Вікіпедія',
             defaultLocale: 'root',
             description: 'Повна документація українського Minecraft сервера UAProject',
-            favicon: './src/assets/favicon.svg',
+            favicon: 'src/assets/favicon.svg',
             head: [
                 {
                     tag: 'meta',
@@ -49,6 +49,13 @@ export default defineConfig({
                     attrs: {
                         name: 'twitter:card',
                         content: 'summary_large_image',
+                    },
+                },
+                {
+                    tag: 'script',
+                    attrs: {
+                        src: '/sidebar-navigation.js',
+                        defer: true,
                     },
                 },
             ],

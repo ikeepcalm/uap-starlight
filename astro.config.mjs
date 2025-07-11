@@ -28,7 +28,7 @@ export default defineConfig({
             title: 'UAProject - Вікіпедія',
             defaultLocale: 'root',
             description: 'Повна документація українського Minecraft сервера UAProject',
-            favicon: 'src/assets/favicon.svg',
+            favicon: 'favicon.svg',
             head: [
                 {
                     tag: 'meta',

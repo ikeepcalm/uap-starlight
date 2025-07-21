@@ -21,7 +21,7 @@ export default defineConfig({
         },
         maxDuration: 8,
     }),
-    site: 'https://docs.uaproject.xyz',
+    site: 'https://docs.uaproject.net',
     integrations: [
         sitemap(),
         starlight({
@@ -34,7 +34,7 @@ export default defineConfig({
                     tag: 'meta',
                     attrs: {
                         property: 'og:image',
-                        content: 'https://docs.uaproject.xyz/favicon.svg',
+                        content: 'https://docs.uaproject.net/favicon.svg',
                     },
                 },
                 {

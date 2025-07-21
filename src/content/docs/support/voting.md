@@ -19,11 +19,11 @@ sidebar:
 ## 🗳 Де голосувати?
 Ви можете підтримати наш сервер, проголосувавши на наступних платформах:
 
-🔗 **Monicore**: [monicore.uaproject.xyz](https://monicore.uaproject.xyz)
+🔗 **Monicore**: [monicore.uaproject.net](https://monicore.uaproject.net)
 
-🔗 **AllMC**: [allmc.uaproject.xyz](https://allmc.uaproject.xyz)
+🔗 **AllMC**: [allmc.uaproject.net](https://allmc.uaproject.net)
 
-🔗 **MCSMonitoring**: [MCSMonitoring.uaproject.xyz](https://mcsmonitoring.com.ua/server/43?ref=43)
+🔗 **MCSMonitoring**: [MCSMonitoring.uaproject.net](https://mcsmonitoring.com.ua/server/43?ref=43)
 
 ---
 

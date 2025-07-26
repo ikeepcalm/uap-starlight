@@ -6,6 +6,8 @@ dist/
 
 # dependencies
 node_modules/
+.claude
+.idea
 
 # logs
 npm-debug.log*

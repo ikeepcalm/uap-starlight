@@ -1,0 +1,377 @@
+---
+// Client-side loot tables component
+---
+
+<div class="loot-tables-container">
+  <div id="loading-state" class="loading-message">
+    <div class="loading-spinner"></div>
+    <p>⏳ Завантаження даних з API...</p>
+    <div class="loading-progress">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+
+  <div id="error-state" class="error-message" style="display: none;">
+    <p>❌ Не вдалося завантажити дані з API сервера</p>
+    <p>Спробуйте оновити сторінку або повернутися пізніше.</p>
+  </div>
+
+  <div id="content-state" style="display: none;"></div>
+</div>
+
+<script>
+  const API_BASE = 'https://catwalk.uaproject.net/v1/servers/heavy/loot';
+
+  // List of loot table names to exclude from display
+  const EXCLUDED_TABLES = ['barrels'];
+
+  // Ukrainian translations for loot table names
+  const TABLE_TRANSLATIONS = {
+    'dungeon': 'Перший Вузол',
+    'dungeon_nether': 'Незерський Вузол',
+    'dungeon_third': 'Третій Вузол',
+    'dungeon_fourth': 'Четвертий Вузол',
+    'end_city_treasure': 'Скарби Міста Краю',
+    'stronghold_corridor': 'Коридор Твердині',
+    'stronghold_crossing': 'Перехрестя Твердині',
+    'stronghold_library': 'Бібліотека Твердині',
+    'abandoned_mineshaft': 'Покинута Шахта',
+    'desert_pyramid': 'Пустельна Піраміда',
+    'jungle_temple': 'Храм Джунглів',
+    'simple_dungeon': 'Простий Підземелля',
+    'village_blacksmith': 'Кузня Села',
+    'woodland_mansion': 'Лісний Особняк',
+    'buried_treasure': 'Закопаний Скарб',
+    'shipwreck_treasure': 'Скарби Корабельної Аварії',
+    'underwater_ruin_big': 'Великі Підводні Руїни',
+    'underwater_ruin_small': 'Малі Підводні Руїни',
+    'pillager_outpost': 'Аванпост Грабіжників',
+    'bastion_treasure': 'Скарби Бастіону',
+    'bastion_other': 'Інші Скарби Бастіону',
+    'bastion_bridge': 'Міст Бастіону',
+    'bastion_hoglin_stable': 'Стайня Хоглінів Бастіону',
+    'ruined_portal': 'Зруйнований Портал',
+    'ancient_city': 'Стародавнє Місто',
+    'ancient_city_ice_box': 'Льодовий Ящик Стародавнього Міста'
+  };
+
+  function translateTableName(tableName: string): string {
+    return TABLE_TRANSLATIONS[tableName] || formatMaterial(tableName);
+  }
+
+  function formatMaterial(material: string): string {
+    return material.toLowerCase()
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+  }
+
+  function formatPotionType(potionType?: string): string {
+    if (!potionType) return '';
+
+    const type = potionType.replace('minecraft:', '');
+    const translations: Record<string, string> = {
+      'strength': 'Сила',
+      'healing': 'Лікування',
+      'swiftness': 'Швидкість',
+      'regeneration': 'Регенерація',
+      'poison': 'Отрута',
+      'weakness': 'Слабкість',
+      'slowness': 'Повільність',
+      'harming': 'Шкода',
+      'fire_resistance': 'Вогнестійкість',
+      'water_breathing': 'Водне дихання',
+      'invisibility': 'Невидимість',
+      'night_vision': 'Нічне бачення',
+      'luck': 'Удача',
+      'unluck': 'Невдача'
+    };
+
+    return translations[type] || type;
+  }
+
+  function getItemDisplayName(item: any): string {
+    if (item.displayName) {
+      return item.displayName;
+    }
+
+    if (item.itemMeta?.['display-name']) {
+      try {
+        const displayMeta = JSON.parse(item.itemMeta['display-name']);
+        if (displayMeta.text) {
+          return displayMeta.text;
+        }
+      } catch (e) {
+        return item.itemMeta['display-name'];
+      }
+    }
+
+    return formatMaterial(item.material);
+  }
+
+  function getItemColor(item: any): string {
+    if (item.displayNameJson?.color) {
+      return getMinecraftColor(item.displayNameJson.color);
+    }
+
+    if (item.itemMeta?.['display-name']) {
+      try {
+        const displayMeta = JSON.parse(item.itemMeta['display-name']);
+        if (displayMeta.color) {
+          return getMinecraftColor(displayMeta.color);
+        }
+      } catch (e) {
+        // Ignore JSON parsing errors
+      }
+    }
+
+    return 'inherit';
+  }
+
+  function getItemLore(item: any): string[] {
+    if (!item.itemMeta?.lore) return [];
+
+    return item.itemMeta.lore.map((loreText: string) => {
+      try {
+        const loreMeta = JSON.parse(loreText);
+        return loreMeta.text || loreText;
+      } catch (e) {
+        return loreText;
+      }
+    });
+  }
+
+  function getMinecraftColor(mcColor: string): string {
+    const colorMap: Record<string, string> = {
+      'black': '#000000',
+      'dark_blue': '#0000AA',
+      'dark_green': '#00AA00',
+      'dark_aqua': '#00AAAA',
+      'dark_red': '#AA0000',
+      'dark_purple': '#AA00AA',
+      'gold': '#FFAA00',
+      'gray': '#AAAAAA',
+      'dark_gray': '#555555',
+      'blue': '#5555FF',
+      'green': '#55FF55',
+      'aqua': '#55FFFF',
+      'red': '#FF5555',
+      'light_purple': '#FF55FF',
+      'yellow': '#FFFF55',
+      'white': '#FFFFFF'
+    };
+
+    return colorMap[mcColor] || 'inherit';
+  }
+
+  function createItemRow(item: any): string {
+    const displayName = getItemDisplayName(item);
+    const itemColor = getItemColor(item);
+    const lore = getItemLore(item);
+
+    const loreTooltip = lore.length > 0 ? `
+    <div class="item-lore-tooltip">
+      ${lore.map((loreText: string) => `<div class="lore-line">${loreText}</div>`).join('')}
+    </div>
+  ` : '';
+
+    return `
+    <tr>
+      <td class="item-material">
+        <span 
+          class="item-name ${lore.length > 0 ? 'has-lore' : ''}"
+          style="color: ${itemColor}"
+          title="${lore.length > 0 ? lore.join('\n') : ''}"
+        >
+          ${displayName}
+        </span>
+        ${loreTooltip}
+      </td>
+      <td class="item-quantity">
+        ${item.minItems === item.maxItems
+        ? item.maxItems.toString()
+        : `${item.minItems}-${item.maxItems}`
+    }
+      </td>
+      <td class="item-weight">${item.weight}</td>
+      <td class="item-chance">${item.chance.toFixed(1)}%</td>
+      <td class="item-potion">
+        ${item.itemMeta?.['potion-type']
+        ? formatPotionType(item.itemMeta['potion-type'])
+        : '—'
+    }
+      </td>
+    </tr>
+  `;
+  }
+
+  function createTableHTML(table: any, details: any): string {
+    return `
+    <div class="loot-table-section">
+      <div class="table-header">
+        <h2>🏺 ${translateTableName(table.name)}</h2>
+        <div class="table-info">
+          <span class="info-item">📦 ${table.minItems}-${table.maxItems} предметів</span>
+          <span class="info-item">🎲 ${table.itemCount} різних типів</span>
+          <span class="info-item">${table.allowDuplicates ? '🔄 З дублікатами' : '🚫 Без дублікатів'}</span>
+        </div>
+      </div>
+      
+      ${details ? `
+        <div class="items-table-wrapper">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Предмет</th>
+                <th>Кількість</th>
+                <th>Вага</th>
+                <th>Шанс</th>
+                <th>Тип зілля</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${details.items
+        .sort((a: any, b: any) => b.chance - a.chance)
+        .map((item: any) => createItemRow(item))
+        .join('')
+    }
+            </tbody>
+          </table>
+        </div>
+      ` : `
+        <div class="error-message">
+          <p>❌ Не вдалося завантажити деталі для цієї таблиці</p>
+        </div>
+      `}
+    </div>
+  `;
+  }
+
+  async function loadLootTables(): Promise<void> {
+    const loadingEl = document.getElementById('loading-state');
+    const errorEl = document.getElementById('error-state');
+    const contentEl = document.getElementById('content-state');
+
+    if (!loadingEl || !errorEl || !contentEl) {
+      console.error('Required DOM elements not found');
+      return;
+    }
+
+    try {
+      // Fetch tables list
+      const tablesResponse = await fetch(`${API_BASE}/tables`, {
+        headers: {
+          'Accept': 'application/json',
+          'User-Agent': 'UAProject-Wiki/1.0'
+        }
+      });
+
+      if (!tablesResponse.ok) {
+        throw new Error(`HTTP ${tablesResponse.status}: ${tablesResponse.statusText}`);
+      }
+
+      const tablesData = await tablesResponse.json();
+
+      if (!tablesData.success || !tablesData.data?.tables) {
+        throw new Error('Invalid API response structure');
+      }
+
+      const tables = tablesData.data.tables.filter((table: any) => 
+        !EXCLUDED_TABLES.includes(table.name)
+      );
+
+      const detailPromises = tables.map(async (table: any) => {
+        try {
+          const detailResponse = await fetch(`${API_BASE}/table/${table.name}`, {
+            headers: {
+              'Accept': 'application/json',
+              'User-Agent': 'UAProject-Wiki/1.0'
+            }
+          });
+
+          if (!detailResponse.ok) {
+            console.warn(`Failed to fetch details for table ${table.name}: HTTP ${detailResponse.status}`);
+            return { table, details: null };
+          }
+
+          const detailData = await detailResponse.json();
+
+          return {
+            table,
+            details: detailData.success && detailData.data?.table ? detailData.data.table : null
+          };
+        } catch (error) {
+          console.error(`Error fetching details for table ${table.name}:`, error);
+          return { table, details: null };
+        }
+      });
+
+      const tablesWithDetails = await Promise.all(detailPromises);
+
+      const html = tablesWithDetails
+          .map(({ table, details }: any) => createTableHTML(table, details))
+          .join('');
+
+      loadingEl.style.display = 'none';
+      contentEl.innerHTML = html;
+      contentEl.style.display = 'block';
+
+    } catch (error) {
+      console.error('Error fetching loot tables:', error);
+
+      loadingEl.style.display = 'none';
+      errorEl.style.display = 'block';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadLootTables);
+</script>
+
+<style>
+  .loot-tables-container {
+    margin: 2rem 0;
+  }
+  .loading-message, .error-message {
+    text-align: center;
+    padding: 2rem;
+    background: color-mix(in srgb, var(--sl-color-accent) 5%, var(--sl-color-bg) 95%);
+    border-radius: var(--uap-border-radius, 0.75rem);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    border-top: 4px solid var(--sl-color-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  .loading-progress {
+    width: 200px;
+    height: 6px;
+    background: color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    border-radius: 3px;
+    margin: 1rem auto 0;
+    overflow: hidden;
+  }
+  .loading-bar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--sl-color-accent), var(--sl-color-accent-high));
+    border-radius: 3px;
+    animation: loading-pulse 2s ease-in-out infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes loading-pulse {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+  }
+</style>

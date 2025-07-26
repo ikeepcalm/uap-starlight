@@ -3,19 +3,19 @@
     --sl-font-bold: 'Headlines Font', 'Inter', system-ui, sans-serif;
     --sl-content-width: 65rem;
     --sl-text-5xl: 2.75rem;
-    
+
     /* Enhanced color palette - only override accent colors */
     --sl-color-accent-low: #dbeafe;
     --sl-color-accent: #3b82f6;
     --sl-color-accent-high: #1d4ed8;
-    
+
     /* Enhanced spacing and dimensions */
     --sl-sidebar-pad-x: 1rem;
     --sl-sidebar-width: 18rem;
     --sl-sidebar-width-closed: 4.5rem;
     --sl-sidebar-width-open: 18rem;
     --sl-sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     /* Enhanced typography */
     --sl-text-h1: 2.5rem;
     --sl-text-h2: 1.75rem;
@@ -23,14 +23,14 @@
     --sl-text-h4: 1.125rem;
     --sl-line-height: 1.7;
     --sl-text-body: 1rem;
-    
+
     /* Custom shadows and effects */
     --uap-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --uap-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --uap-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --uap-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --uap-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    
+
     /* Custom border radius */
     --uap-border-radius: 0.75rem;
     --uap-border-radius-sm: 0.5rem;
@@ -571,12 +571,12 @@
     .header {
         display: none !important;
     }
-    
+
     .sl-markdown-content {
         max-width: 100% !important;
         padding: 0 !important;
     }
-    
+
     .sl-markdown-content img {
         box-shadow: none !important;
         border: 1px solid #ccc !important;
@@ -590,53 +590,53 @@
         margin: 1rem;
         border-radius: var(--uap-border-radius);
     }
-    
+
     .sl-markdown-content h1 {
         font-size: 2rem;
     }
-    
+
     .sl-markdown-content h2 {
         font-size: 1.5rem;
     }
-    
+
     .sidebar-content a {
         padding: 0.5rem 0.75rem;
         font-size: 0.9rem;
     }
-    
+
     .sl-markdown-content {
         padding: 1rem;
     }
-    
+
     /* UAP Mobile Styles */
     .uap-hero {
         padding: 1.5rem 1rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .uap-hero-content h1 {
         font-size: 2rem;
     }
-    
+
     .uap-hero-content p {
         font-size: 1rem;
     }
-    
+
     .uap-cards-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
         margin: 1.5rem 0;
     }
-    
+
     .uap-card {
         padding: 1.25rem;
     }
-    
+
     .uap-card-icon {
         font-size: 2rem;
         margin-bottom: 0.75rem;
     }
-    
+
     .uap-card-highlight {
         grid-column: 1;
     }
@@ -649,8 +649,228 @@
         --sl-color-accent-high: #004499;
         --sl-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
-    
+
     .sl-markdown-content a {
         text-decoration: underline;
+    }
+}
+
+/* Loot Tables Styles - Global for dynamic content */
+.loot-table-section {
+    margin-bottom: 3rem;
+    background: var(--sl-color-bg);
+    border-radius: var(--uap-border-radius, 0.75rem);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+    overflow: hidden;
+}
+
+.table-header {
+    background: linear-gradient(135deg,
+    color-mix(in srgb, var(--sl-color-accent) 15%, var(--sl-color-bg) 85%) 0%,
+    var(--sl-color-bg) 100%
+    );
+    padding: 1.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-accent) 20%, transparent);
+}
+
+.table-header h2 {
+    margin: 0 0 1rem 0;
+    color: var(--sl-color-accent);
+    font-size: 1.5rem;
+}
+
+.table-info {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    background: color-mix(in srgb, var(--sl-color-accent) 10%, transparent);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.items-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    display: block;
+}
+
+.items-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    table-layout: fixed;
+    display: table;
+}
+
+.items-table thead {
+    width: 100%;
+    min-width: 100%;
+    display: table-header-group;
+}
+
+.items-table thead tr {
+    width: 100%;
+    display: table-row;
+}
+
+.items-table th {
+    background: color-mix(in srgb, var(--sl-color-accent) 10%, var(--sl-color-bg) 90%);
+    padding: 1rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
+    display: table-cell;
+    box-sizing: border-box;
+}
+
+.items-table th:first-child {
+    width: 40%;
+    min-width: 200px;
+}
+
+.items-table th:nth-child(2),
+.items-table th:nth-child(3),
+.items-table th:nth-child(4) {
+    width: 15%;
+    text-align: center;
+}
+
+.items-table th:last-child {
+    width: 15%;
+}
+
+.items-table tbody {
+    width: 100%;
+    display: table-row-group;
+}
+
+.items-table tbody tr {
+    width: 100%;
+    display: table-row;
+}
+
+.items-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--sl-color-accent) 10%, transparent);
+    display: table-cell;
+    box-sizing: border-box;
+}
+
+.items-table tbody tr:hover {
+    background: color-mix(in srgb, var(--sl-color-accent) 5%, transparent);
+}
+
+.item-material {
+    font-weight: 500;
+    position: relative;
+    min-width: 200px;
+}
+
+.item-name {
+    font-weight: 600;
+    cursor: default;
+}
+
+.item-name.has-lore {
+    cursor: help;
+    border-bottom: 1px dotted currentColor;
+}
+
+.item-lore-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: color-mix(in srgb, var(--sl-color-bg) 95%, black);
+    border: 1px solid color-mix(in srgb, var(--sl-color-accent) 30%, transparent);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    z-index: 1000;
+    min-width: 250px;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-5px);
+    transition: all 0.2s ease;
+}
+
+.item-material:hover .item-lore-tooltip {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.lore-line {
+    color: color-mix(in srgb, var(--sl-color-text) 80%, transparent);
+    margin: 0.25rem 0;
+}
+
+.lore-line:first-child {
+    margin-top: 0;
+}
+
+.lore-line:last-child {
+    margin-bottom: 0;
+}
+
+.item-quantity, .item-weight {
+    text-align: center;
+    font-family: 'Monocraft', monospace;
+}
+
+.item-chance {
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Monocraft', monospace;
+}
+
+.item-potion {
+    font-style: italic;
+    color: color-mix(in srgb, var(--sl-color-text) 80%, transparent);
+}
+
+/* Loot Tables Responsive design */
+@media (max-width: 768px) {
+    .table-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .info-item {
+        text-align: center;
+    }
+
+    .items-table {
+        font-size: 0.8rem;
+    }
+
+    .items-table th,
+    .items-table td {
+        padding: 0.5rem 0.375rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-header {
+        padding: 1rem;
+    }
+
+    .table-header h2 {
+        font-size: 1.25rem;
+    }
+
+    .items-table th:nth-child(3),
+    .items-table td:nth-child(3),
+    .items-table th:nth-child(5),
+    .items-table td:nth-child(5) {
+        display: none;
     }
 }

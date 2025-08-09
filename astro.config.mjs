@@ -88,14 +88,6 @@ export default defineConfig({
                     autogenerate: {directory: 'guides'},
                 },
                 {
-                    label: '☔ Магія?',
-                    autogenerate: {directory: 'magic'},
-                },
-                {
-                    label: '🪄 Магічні шляхи',
-                    autogenerate: {directory: 'pathways'},
-                },
-                {
                     label: '✨ Підтримка ',
                     autogenerate: {directory: 'support'},
                 }
